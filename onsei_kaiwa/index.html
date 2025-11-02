@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<title>Sample01</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- reset.css ress -->
+		<!-- <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" /> -->
+		<link rel="stylesheet" href="css/style.css">
+		<script src="js/jquery-3.5.1.min.js"></script>
+	</head>
+
+	<body>
+		<h1>音声認識おためし</h1>
+
+		<!-- イベント起動用のボタン -->
+		<button id="btn1">btn1</button>
+
+		<!-- 表示操作用のdiv -->
+		<div id="contena">音声認識だよ<br></div>
+		<div id="contena_ai">お返事だよ<br></div>
+
+		
+	<script src="js/script.js"></script>
+	<script>
+		SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+		const recognition = new SpeechRecognition();
+		if ('SpeechRecognition' in window) {
+			// ユーザのブラウザは音声合成に対応しています。
+			console.log("ユーザのブラウザは音声合成に対応しています。");
+		} else {
+			// ユーザのブラウザは音声合成に対応していません。
+			console.log("ユーザのブラウザは音声合成に対応していません。");
+		}
+
+		// recognition.interimResults = true; // 途中でも認識するようにする設定
+		recognition.continuous = true;	// ずっと認識させる
+
+		recognition.onresult = (event) => {
+			recog_word = event.results[event.results.length-1][0].transcript;
+			console.log(recog_word);
+			contena.innerHTML += recog_word;
+
+			let ramdom_dotti = 0;
+
+			// console.log(event.results[0].isFinal); // 発言が終了したかどうか。
+			if(event.results[0].isFinal){
+				contena.innerHTML += "<br>";
+
+				if(recog_word.indexOf("こんにちは") !== -1){
+					contena_ai.innerHTML = "はい！こんにちは！";
+				}
+				if(recog_word.indexOf("こんばんは") !== -1){
+					contena_ai.innerHTML = "はいー！こんばんは。";
+				}
+				if(recog_word.indexOf("眠い") !== -1){
+					contena_ai.innerHTML = "もう遅いですからね。そろそろ寝ましょう？";
+				}
+				if(recog_word.indexOf("やだ") !== -1){
+					contena_ai.innerHTML = "何か嫌なんですか？疲れたら少しお茶入れて休憩しましょう。";
+				}
+				if(recog_word.indexOf("どっち") !== -1){
+					ramdom_dotti = Math.floor(Math.random() * 2);
+					if(ramdom_dotti == 1){
+						contena_ai.innerHTML = "最初のにしましょう！";						
+					}else{
+						contena_ai.innerHTML = "後の方にしましょう。";
+					}
+				}
+				if(recog_word.indexOf("やさしい") !== -1){
+					contena_ai.innerHTML = "そんなことないですよ。ですが、ありがとうございます。";
+				}
+				if(recog_word.indexOf("優しい") !== -1){
+					contena_ai.innerHTML = "そんなことないですよ。ですが、ありがとうございます。";
+				}
+				if(recog_word.indexOf("疲れ") !== -1){
+					contena_ai.innerHTML = "今日はもうお休みしましょう。休む勇気！です。";
+				}
+				if(recog_word.indexOf("おやすみ") !== -1){
+					contena_ai.innerHTML = "おやすみなさいー(つ∀-)";
+				}
+				if(recog_word.indexOf("眠い") !== -1){
+					contena_ai.innerHTML = "寝る勇気、です！";
+				}
+				if(recog_word.indexOf("好き") !== -1){
+					contena_ai.innerHTML = "私も大好きです。ぎゅ。（googleHomeのパクリ）";
+				}
+				if(recog_word.indexOf("おはよう") !== -1){
+					contena_ai.innerHTML = "おはようございます。今日もいいい一日になるといいですね";
+				}
+				if(recog_word.indexOf("えらい") !== -1){
+					contena_ai.innerHTML = "おほめに預かり光栄です😊";
+				}
+				if(recog_word.indexOf("ほめて") !== -1){
+					contena_ai.innerHTML = "えらいぞ～～！";
+				}
+				if(recog_word.indexOf("褒めて") !== -1){
+					contena_ai.innerHTML = "えらいぞ～～！";
+				}
+				if(recog_word.indexOf("眠い") !== -1){
+					contena_ai.innerHTML = "寝る勇気、です！";
+				}
+				if(recog_word.indexOf("眠い") !== -1){
+					contena_ai.innerHTML = "寝る勇気、です！";
+				}
+			}
+		}
+	  
+		// recognition.addEventListener('result', (event) => { 
+		// 	alert(event.results[0][0].transcript);
+		// })
+
+		recognition.start();
+	  </script>
+	</body>
+</html>
