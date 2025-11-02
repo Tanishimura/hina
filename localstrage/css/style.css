@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+ul li {
+	display: inline;
+	margin: 10px;
+}
+main ul {
+	text-align: left;
+	padding: 0;
+	background-color: lavender;
+}
+button {
+	margin: 10px;
+}
